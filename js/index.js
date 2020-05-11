@@ -22,3 +22,28 @@ async function fetchHtml() {
     const response = await fetch('client-data.html');
     document.querySelector('.html-container').innerHTML = await response.text();
 }
+
+
+document.querySelector('.get-json-ajax').addEventListener('click', getJsonAjax);
+
+function getJsonAjax() {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const data = JSON.parse(xhr.response.Text);
+            document.querySelector('.client-name').innerText = data.name;
+            document.querySelector('.account-balance').innerText = data.balance;
+        }
+    }
+    xhr.open('GET', 'client-data.json', true);
+    xhr.send();
+}
+
+document.querySelector('.fetch-json').addEventListener('click', fetchJson);
+
+async function fetchJson() {
+    const response = await fetch('client-data.json');
+    const data = await response.json();
+    document.querySelector('.client-name').innerText = data.name;
+    document.querySelector('.account-balance').innerText = data.balance;
+}
