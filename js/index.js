@@ -30,7 +30,7 @@ function getJsonAjax() {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            const data = JSON.parse(xhr.response.Text);
+            const data = JSON.parse(xhr.responseText);
             document.querySelector('.client-name').innerText = data.name;
             document.querySelector('.account-balance').innerText = data.balance;
         }
